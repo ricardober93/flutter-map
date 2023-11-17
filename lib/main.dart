@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:maps_app/bloc/gps/gps_bloc.dart';
+import 'package:maps_app/bloc/bloc.dart';
 import 'package:maps_app/screen/screen.dart';
 
 void main() {
   runApp(MultiBlocProvider(providers: [
     BlocProvider(create: (context) => GpsBloc()),
+    BlocProvider(create: (context) => LocationBloc()),
+    BlocProvider(
+        create: (context) =>
+            MapBloc(locationBloc: context.read<LocationBloc>())),
   ], child: const App()));
 }
 
@@ -15,6 +19,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'App Maps',
       home: LoadingScreen(),
     );
