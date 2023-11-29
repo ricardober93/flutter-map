@@ -33,7 +33,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       }
 
       if (state.following) {
-        moveCamara(state.lastLocation);
+        moveCamara(state.lastLocation!);
       }
     });
   }
@@ -45,7 +45,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   }
 
   void _onPolyneNewPoint(UserStatePolilyne event, Emitter<MapState> emit) {
-    final polylines = state.polylines;
+    if (!state.showMyRoute) return;
+    final polylines = <String, Polyline>{};
     polylines['userState'] = Polyline(
       polylineId: const PolylineId('userState'),
       width: 4,

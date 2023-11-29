@@ -10,6 +10,7 @@ void main() {
     BlocProvider(
         create: (context) =>
             MapBloc(locationBloc: context.read<LocationBloc>())),
+    BlocProvider(create: (context) => SearchBloc())
   ], child: const App()));
 }
 

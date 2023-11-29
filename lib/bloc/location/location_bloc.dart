@@ -11,7 +11,7 @@ part 'location_state.dart';
 class LocationBloc extends Bloc<LocationEvent, LocationState> {
   StreamSubscription? positionStream;
 
-  LocationBloc() : super(const LocationState(lastLocation: LatLng(0, 0))) {
+  LocationBloc() : super(const LocationState()) {
     on<OnLocationUpdate>((event, emit) {
       emit(state.copyWith(
         lastLocation: event.lastLocation,

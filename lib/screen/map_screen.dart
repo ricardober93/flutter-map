@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:maps_app/bloc/location/location_bloc.dart';
 import 'package:maps_app/bloc/map/map_bloc.dart';
-import 'package:maps_app/components/btn_location.dart';
-import 'package:maps_app/components/btn_toogle_route.dart';
-import 'package:maps_app/components/follow_user.dart';
+
+import 'package:maps_app/components/components.dart';
 import 'package:maps_app/views/map_view.dart';
 
 class MapScreen extends StatefulWidget {
@@ -20,7 +19,7 @@ class _MapScreenState extends State<MapScreen> {
   void initState() {
     super.initState();
     locationBloc = BlocProvider.of<LocationBloc>(context);
-    locationBloc?.startFollow();
+    locationBloc!.startFollow();
   }
 
   @override
@@ -57,11 +56,13 @@ class _MapScreenState extends State<MapScreen> {
                 child: Stack(
                   children: [
                     MapView(
-                        initLocation: locationState.lastLocation,
+                        initLocation: locationState.lastLocation!,
                         polylines: polylines.values.toSet()),
                     BtnLocation(state: locationState),
                     const FollowUser(),
                     const BtnToogleRoute(),
+                    const SearchBarWidget(),
+                    const ManualMarket(),
                   ],
                 ),
               );

@@ -10,8 +10,8 @@ class BtnLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 15,
-      right: 15,
+      bottom: 15,
+      left: 15,
       child: SafeArea(
         child: CircleAvatar(
           backgroundColor: Colors.white,
@@ -21,7 +21,7 @@ class BtnLocation extends StatelessWidget {
             onPressed: () {
               final mapBloc = BlocProvider.of<MapBloc>(context);
 
-              mapBloc.moveCamara(state.lastLocation);
+              mapBloc.moveCamara(state.lastLocation!);
             },
           ),
         ),

@@ -21,9 +21,7 @@ class GpsScreen extends StatelessWidget {
 }
 
 class _AccessButton extends StatelessWidget {
-  const _AccessButton({
-    super.key,
-  });
+  const _AccessButton();
 
   @override
   Widget build(BuildContext context) {
