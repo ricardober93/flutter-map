@@ -35,39 +35,33 @@ class _SearchBarCustomBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return FadeInDown(
       duration: const Duration(milliseconds: 300),
-      child: Positioned(
-        top: 0,
-        left: 0,
-        child: SafeArea(
-          child: GestureDetector(
-            onTap: () async {
-              final result = await showSearch(
-                  context: context, delegate: SearchDestinationDelegate());
-              if (result == null) return;
+      child: SafeArea(
+        child: GestureDetector(
+          onTap: () async {
+            final result = await showSearch(
+                context: context, delegate: SearchDestinationDelegate());
+            if (result == null) return;
 
-              _onSearchResult(context, result);
-            },
-            child: Container(
-                alignment: Alignment.centerLeft,
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                width: MediaQuery.of(context).size.width - 50,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(100),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(0, 5),
-                      blurRadius: 5,
-                    ),
-                  ],
-                ),
-                child: Text('A donde quieres ir ?')),
-          ),
+            _onSearchResult(context, result);
+          },
+          child: Container(
+              alignment: Alignment.centerLeft,
+              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              width: MediaQuery.of(context).size.width - 20,
+              height: 40,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(100),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black12,
+                    offset: Offset(0, 5),
+                    blurRadius: 5,
+                  ),
+                ],
+              ),
+              child: const Text('A donde quieres ir ?')),
         ),
       ),
     );

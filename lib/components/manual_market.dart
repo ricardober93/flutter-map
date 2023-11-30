@@ -24,6 +24,9 @@ class _ManualMarketBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final searchBloc = BlocProvider.of<SearchBloc>(context);
+    final locationBloc = BlocProvider.of<LocationBloc>(context);
+    final mapBloc = BlocProvider.of<MapBloc>(context);
     return SizedBox(
       width: size.width,
       height: size.height,
@@ -44,8 +47,22 @@ class _ManualMarketBody extends StatelessWidget {
               child: MaterialButton(
                 minWidth: size.width - 120,
                 height: 50,
-                onPressed: () {
+                onPressed: () async {
                   //Confirmar ubicación
+
+                  final start = locationBloc.state.lastLocation;
+
+                  if (start == null) return;
+
+                  final end = mapBloc.mapCenter;
+
+                  if (end == null) return;
+
+                  searchBloc.add(OnDeactivateManualMarker());
+                  final route = await searchBloc.getStartToEnd(start, end);
+
+                  await mapBloc.drawRoutePolyline(route);
+
                 },
                 color: Colors.black,
                 shape: const StadiumBorder(),

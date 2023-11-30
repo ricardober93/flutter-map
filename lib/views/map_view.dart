@@ -32,6 +32,7 @@ class MapView extends StatelessWidget {
           polylines: polylines,
           onMapCreated: (controller) =>
               mapController.add(OnMapInitilizaedEvent(controller)),
+          onCameraMove: (position) => mapController.mapCenter = position.target,
         ),
       ),
     );

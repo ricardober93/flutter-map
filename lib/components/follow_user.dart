@@ -22,7 +22,8 @@ class FollowUser extends StatelessWidget {
                     ? Icons.directions_run_rounded
                     : Icons.hail_rounded),
                 onPressed: () {
-                  mapBloc.add(const OnFollowUserEvent(isFollowingUser: true));
+                  mapBloc.add(OnFollowUserEvent(
+                      isFollowingUser: !state.isFollowingUser));
                 },
               );
             },
