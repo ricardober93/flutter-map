@@ -1,10 +1,14 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart' show LatLng;
+
 class SearchResult {
   final bool cancel;
   final bool manual;
+  final LatLng? destination;
 
   SearchResult({
     required this.cancel,
     this.manual = false,
+    this.destination,
   });
 
   factory SearchResult.fromJson(Map<String, dynamic> json) {

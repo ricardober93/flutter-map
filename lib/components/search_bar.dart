@@ -33,6 +33,11 @@ class _SearchBarCustomBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final searchBloc = BlocProvider.of<SearchBloc>(context);
+    final locationBloc = BlocProvider.of<LocationBloc>(context);
+    final mapBloc = BlocProvider.of<MapBloc>(context);
+              
     return FadeInDown(
       duration: const Duration(milliseconds: 300),
       child: SafeArea(
@@ -41,8 +46,18 @@ class _SearchBarCustomBody extends StatelessWidget {
             final result = await showSearch(
                 context: context, delegate: SearchDestinationDelegate());
             if (result == null) return;
-
+            if (result.cancel) return;
             _onSearchResult(context, result);
+
+            if (result.destination?.latitude != 0.0 &&
+                result.destination?.longitude != 0.0) {
+              final start = locationBloc.state.lastLocation!;
+              final route =
+                  await searchBloc.getStartToEnd(start, result.destination!);
+
+              await mapBloc.drawRoutePolyline(route);
+            }
+            
           },
           child: Container(
               alignment: Alignment.centerLeft,

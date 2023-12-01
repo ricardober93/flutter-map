@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
-
-const accessToken =
-    'pk.eyJ1IjoicmljYXJkb2JlcjkzIiwiYSI6ImNscDdkY3FmODBpOWkya3Fpa25pd2dsMmgifQ.x1Em6CbITy0N9XmNPdrK7w';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class TrafficInterceptor extends Interceptor {
   @override
@@ -11,7 +9,7 @@ class TrafficInterceptor extends Interceptor {
       'geometries': 'polyline6',
       'overview': 'simplified',
       'steps': false,
-      'access_token': accessToken
+      'access_token': dotenv.env['ACCESS_TOKEN']
     });
 
     super.onRequest(options, handler);
