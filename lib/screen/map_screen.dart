@@ -57,7 +57,9 @@ class _MapScreenState extends State<MapScreen> {
                   children: [
                     MapView(
                         initLocation: locationState.lastLocation!,
-                        polylines: polylines.values.toSet()),
+                        polylines: polylines.values.toSet(),
+                        markers: mapstate.markers.values.toSet()),
+
                     BtnLocation(state: locationState),
                     const FollowUser(),
                     const BtnToogleRoute(),

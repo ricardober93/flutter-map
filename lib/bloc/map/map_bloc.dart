@@ -33,7 +33,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     });
 
     on<DisplayPolylinesEvent>((event, emit) {
-      emit(state.copyWith(polylines: event.polylines));
+      emit(state.copyWith(polylines: event.polylines, markers: event.markers));
     });
 
     _locationSubscription = locationBloc.stream.listen((state) {
@@ -74,6 +74,9 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   }
 
   Future drawRoutePolyline(RouteDestination route) async {
+
+    if (route.points.isEmpty) return;
+
     final myRoute = Polyline(
       polylineId: const PolylineId('route'),
       color: Colors.black,
@@ -83,10 +86,25 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       endCap: Cap.roundCap,
     );
 
+    final startMartker = Marker(
+      markerId: const MarkerId('start'),
+      position: route.points.first,
+    );
+
+    final endMarker = Marker(
+      markerId: const MarkerId('end'),
+      position: route.points.last,
+    );
+
     final curretPolylines = Map<String, Polyline>.from(state.polylines);
     curretPolylines['route'] = myRoute;
 
-    add(DisplayPolylinesEvent(curretPolylines));
+    final curretMarker = Map<String, Marker>.from(state.markers);
+
+    curretMarker['start'] = startMartker;
+    curretMarker['end'] = endMarker;
+
+    add(DisplayPolylinesEvent(curretPolylines, curretMarker));
   }
 
   moveCamara(LatLng destination) {

@@ -6,9 +6,13 @@ import 'package:maps_app/bloc/bloc.dart';
 class MapView extends StatelessWidget {
   final LatLng initLocation;
   final Set<Polyline> polylines;
+final Set<Marker> markers;
 
   const MapView(
-      {super.key, required this.initLocation, required this.polylines});
+      {super.key,
+      required this.initLocation,
+      required this.polylines,
+      required this.markers});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +34,7 @@ class MapView extends StatelessWidget {
           myLocationButtonEnabled: false,
           zoomControlsEnabled: false,
           polylines: polylines,
+          markers: markers,
           onMapCreated: (controller) =>
               mapController.add(OnMapInitilizaedEvent(controller)),
           onCameraMove: (position) => mapController.mapCenter = position.target,

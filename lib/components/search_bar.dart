@@ -53,7 +53,7 @@ class _SearchBarCustomBody extends StatelessWidget {
                 result.destination?.longitude != 0.0) {
               final start = locationBloc.state.lastLocation!;
               final route =
-                  await searchBloc.getStartToEnd(start, result.destination!);
+                  await searchBloc.getStartToEnd(start, result.destination);
 
               await mapBloc.drawRoutePolyline(route);
             }
